@@ -14,7 +14,7 @@ for line in sys.stdin:
     thisNumSales, thisSale = data_mapped
 
     salesTotal += float(thisSale)
-    numberOfSales += float(thisNumSales)
+    numberOfSales += int(thisNumSales)
 	
 
 print numberOfSales, "\t", salesTotal
