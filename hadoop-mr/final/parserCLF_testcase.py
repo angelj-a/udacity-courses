@@ -37,6 +37,22 @@ class ParserCLFTestCase(unittest.TestCase):
 		self.assertNotEqual(res,None)
 		self.assertEqual(expected_resource,res)
 		
+	def test_getResourceIgnoresNetloc(self):
+		req1 = "GET /displaytitle.php?id=347 HTTP/1.1"
+		req2 = "GET http://www.example.com/displaytitle.php?id=347 HTTP/1.1"
+		
+		res1 = parserCLF.getResourceName(req1)
+		res2 = parserCLF.getResourceName(req2)
+		self.assertEqual(res1,res2)		
+		
+	def test_getResourceNotIgnoringQueryparams(self):
+		req1 = "GET /displaytitle.php?id=347 HTTP/1.1"
+		req2 = "GET /displaytitle.php HTTP/1.1"
+
+		res1 = parserCLF.getResourceName(req1)
+		res2 = parserCLF.getResourceName(req2)
+		self.assertNotEqual(res1,res2)		
+		
 
 if __name__ == '__main__':
     unittest.main()
